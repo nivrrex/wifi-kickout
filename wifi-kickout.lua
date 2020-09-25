@@ -86,7 +86,8 @@ function table.match(tbl,value)
 end
 
 local black_list = {"00:00:00:00:00:00"}
-local white_list = {"50:BD:5F:6E:34:DC","EC:55:F9:07:7B:55"}
+local white_list = {"00:00:00:00:00:00"}
+local only24g_list = {"00:00:00:00:00:00"}
 
 local kickout_24G = -85
 local kickout_5G = -75
@@ -143,8 +144,10 @@ while true do
                 log_sys(string.format("Kickout the client %s , %d > %d (5G)", mac_index, signal_5g, kickout_5G), logfile)
                 kick_out(wlan_name, mac_index, 3000)
             elseif (signal_24g ~= 0) and (signal_5g == 0) and (signal_24g > kickout_24G_5G) then
-                log_sys(string.format("Kickout the client %s , %d < %d (change 2.4G to 5G)", mac_index, signal_24g, kickout_24G_5G), logfile)
-                kick_out(wlan_name, mac_index, 3000)
+                if not table.match(only24g_list, mac_index ) then
+                    log_sys(string.format("Kickout the client %s , %d < %d (change 2.4G to 5G)", mac_index, signal_24g, kickout_24G_5G), logfile)
+                    kick_out(wlan_name, mac_index, 3000)
+                end
             end
         end
     end
