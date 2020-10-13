@@ -1,6 +1,5 @@
 #!/usr/bin/lua
 require "ubus"
-local sleep = require('sleep')
 
 function log_sys(msg,logfile)
     local reset = string.format("%s[%sm",string.char(27), tostring(0))
@@ -195,8 +194,7 @@ repeat
         end
     end
     if always then
-      --os.execute("sleep 30")
-        sleep(30 * 1000)
+        os.execute("sleep 30")
     end
 until not always 
 logfile:close()
