@@ -113,8 +113,8 @@ local black_list = {"00:00:00:00:00:00"}
 local white_list = {"00:00:00:00:00:00"}
 local only24g_list = {"00:00:00:00:00:00"} --对应仅支持2.4G的终端
 
-local only_5g = false   --对应路由器
-local only_24g = false  --对应路由器
+local only_5g = false   --对应路由器仅支持5G
+local only_24g = false  --对应路由器仅支持2.4G
 
 local kickout_24G = -85
 local kickout_5G = -76
@@ -135,7 +135,7 @@ end
 
 --命令行参数，设置是否一直循环
 if arg_check(arg[1],"ALWAYS") then always = true else always = false end
---命令行参数，设置是否仅仅监测2.4G或者仅仅监测5G
+--命令行参数，设置是否仅监测2.4G网络或者仅监测5G网络
 if arg_check(arg[2],"ONLY_24G") then
     only_24g = true
     only_5g = false
